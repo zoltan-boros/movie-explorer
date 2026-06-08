@@ -1,8 +1,35 @@
 .movie {
   margin: 1em 0;
+
   .title {
     font-weight: 700;
   }
+
+  .tagline {
+  }
+  .movieData {
+    div {
+      display: inline-block;
+    }
+    div:not(:first-child) {
+      margin-left: 1em;
+      padding-left: 1em;
+      border-left: 1px solid #888;
+    }
+  }
+
+  .releaseDate {
+  }
+
+  .genre {
+  }
+
+  .runtime {
+  }
+
+  .score {
+  }
+
   .overview {
   }
 }

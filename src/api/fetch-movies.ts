@@ -5,8 +5,14 @@ const query = `query SearchMovies($title: String!) {
     searchMovies(query: $title) {
       id
       name
-      overview
+      tagline
+      genres {
+        name
+      }
+      runtime
+      score
       releaseDate
+      overview
       cast(limit: 1) {
         id
         person {
