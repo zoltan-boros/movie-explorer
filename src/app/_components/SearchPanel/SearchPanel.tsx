@@ -4,16 +4,21 @@ import { useCallback, useState } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import type { ISearchPanelProps } from './SearchPanel.types';
 import { getMovies } from '@/api/get-movies';
+import styles from './SearchPanel.module.css';
+import { isBlank } from '@/utils/string/isBlank';
 
 export function SearchPanel(props: ISearchPanelProps) {
-  const { setMovies } = props;
+  const { onSearchComplete } = props;
 
-  // 'teach you a lesson', 'alice and steve'
+  // 0 finding for search term: 'alice and steve'
+  // 1 finding for search term: 'teach you a lesson'
   const [searchTerm, setSearchTerm] = useState<string>('fight club');
 
   const handleSearch = useCallback(() => {
-    getMovies(searchTerm, setMovies);
-  }, [searchTerm, setMovies]);
+    if (!isBlank(searchTerm)) {
+      getMovies(searchTerm, onSearchComplete);
+    }
+  }, [searchTerm, onSearchComplete]);
 
   const handleSearchBoxKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
@@ -32,15 +37,22 @@ export function SearchPanel(props: ISearchPanelProps) {
   );
 
   return (
-    <div>
+    <div className={styles.searchPanel} data-testid="searchPanel">
       <input
         type="text"
         placeholder="Movie title"
         value={searchTerm}
+        className={styles.searchBox}
         onChange={handleSearchTermChange}
         onKeyUp={handleSearchBoxKeyDown}
+        data-testid="searchBox"
       />
-      <button type="button" onClick={handleSearch}>
+      <button
+        type="button"
+        className={styles.searchButton}
+        onClick={handleSearch}
+        data-testid="searchButton"
+      >
         Search
       </button>
     </div>

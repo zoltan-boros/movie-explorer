@@ -21,7 +21,8 @@
 /build
 
 # misc
-/ignored/
+/ignore/
+*.ignore
 .DS_Store
 *.pem
 

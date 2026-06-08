@@ -1,0 +1,23 @@
+import { isBlank } from "./isBlank";
+
+describe("utils/string/isBlank", () => {
+  it("should return true for undefined", () => {
+    expect(isBlank(undefined)).toEqual(true);
+  });
+
+  it("should return true for null", () => {
+    expect(isBlank(null)).toEqual(true);
+  });
+
+  it("should return true for empty string", () => {
+    expect(isBlank("")).toEqual(true);
+  });
+
+  it("should return true for string that contains spaces only", () => {
+    expect(isBlank("  ")).toEqual(true);
+  });
+
+  it("should return false for non-blank string", () => {
+    expect(isBlank("foo")).toEqual(false);
+  });
+});

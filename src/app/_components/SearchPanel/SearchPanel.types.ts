@@ -1,5 +1,10 @@
 import type { IMovie } from "@/api/movie.types";
 
+export interface IOnSearchCompleteParams {
+  searchTerm: string;
+  movies: IMovie[];
+}
+
 export interface ISearchPanelProps {
-  setMovies: (movies: IMovie[]) => void;
+  onSearchComplete: (params: IOnSearchCompleteParams) => void;
 }
