@@ -8,11 +8,12 @@ import { getMovies } from '@/api/get-movies';
 export function SearchPanel(props: ISearchPanelProps) {
   const { setMovies } = props;
 
-  const [searchText, setSearchText] = useState<string>('');
+  // 'teach you a lesson', 'alice and steve'
+  const [searchTerm, setSearchTerm] = useState<string>('fight club');
 
   const handleSearch = useCallback(() => {
-    getMovies(searchText, setMovies);
-  }, [searchText, setMovies]);
+    getMovies(searchTerm, setMovies);
+  }, [searchTerm, setMovies]);
 
   const handleSearchBoxKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
@@ -23,9 +24,9 @@ export function SearchPanel(props: ISearchPanelProps) {
     [handleSearch],
   );
 
-  const handleSearchTextChange = useCallback(
+  const handleSearchTermChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setSearchText(event.target.value);
+      setSearchTerm(event.target.value);
     },
     [],
   );
@@ -35,8 +36,8 @@ export function SearchPanel(props: ISearchPanelProps) {
       <input
         type="text"
         placeholder="Movie title"
-        value={searchText}
-        onChange={handleSearchTextChange}
+        value={searchTerm}
+        onChange={handleSearchTermChange}
         onKeyUp={handleSearchBoxKeyDown}
       />
       <button type="button" onClick={handleSearch}>

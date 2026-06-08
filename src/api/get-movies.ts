@@ -1,10 +1,11 @@
-// import { fetchMovies } from "./fetch-movies.mock";
+// import { fetchMovies } from "./fetch-movies.local-mock";
+// import { fetchMovies } from "./fetch-movies.remote-mock";
 import { fetchMovies } from "./fetch-movies";
 import type { IMovie } from "./movie.types";
 
 export function getMovies(
-  searchText: string,
+  searchTerm: string,
   setMovies: (movies: IMovie[]) => void,
 ): void {
-  fetchMovies(searchText).then((movies) => setMovies(movies));
+  fetchMovies(searchTerm).then((movies) => setMovies(movies));
 }
