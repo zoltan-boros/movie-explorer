@@ -3,17 +3,24 @@ import type { IMovieProps } from './Movie.types';
 import styles from './movie.module.css';
 import { toDateString } from '@/utils/date-time/to-date-string';
 import { useCallback } from 'react';
-import { getWikipediaSearchResult } from '@/api/get-wikipedia-search-result';
+import { getWikipediaPageExtract } from '@/api/get-wikipedia-page-extract';
+import type { IOnRequestChangeParams } from '@/api/request-change.types';
+import type { IWikipediaPageExtract } from '@/api/wikipedia-page-extract.types';
 
 export function Movie(props: IMovieProps) {
   const { movie } = props;
 
-  const handleWikipediaSEarchComplete = useCallback(() => {}, []);
+  const handleRequestCompletion = useCallback(
+    (event: IOnRequestChangeParams<IWikipediaPageExtract>) => {
+      console.log('Extract:', event.data.extract);
+    },
+    [],
+  );
 
   const handleNameClick = useCallback(() => {
     console.log('Title clicked');
-    getWikipediaSearchResult(movie.name, handleWikipediaSEarchComplete);
-  }, [movie.name, handleWikipediaSEarchComplete]);
+    getWikipediaPageExtract(movie.name, handleRequestCompletion);
+  }, [movie.name, handleRequestCompletion]);
 
   const movieData: React.ReactNode[] = [
     movie.releaseDate ? (

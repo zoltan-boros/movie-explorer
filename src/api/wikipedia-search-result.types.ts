@@ -1,3 +1,3 @@
 export interface IWikipediaSearchResult {
-  text: string; // For now...
+  pageTitle: string;
 }
