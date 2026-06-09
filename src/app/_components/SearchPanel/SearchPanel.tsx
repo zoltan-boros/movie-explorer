@@ -12,7 +12,8 @@ export function SearchPanel(props: ISearchPanelProps) {
 
   // 0 finding for search term: 'alice and steve'
   // 1 finding for search term: 'teach you a lesson'
-  const [searchTerm, setSearchTerm] = useState<string>('fight club');
+  // many finding for search term: 'fight club'
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleSearch = useCallback(() => {
     if (!isBlank(searchTerm)) {

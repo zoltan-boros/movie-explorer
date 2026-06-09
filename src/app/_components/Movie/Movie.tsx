@@ -2,9 +2,18 @@ import { isEmpty } from '@/utils/array/isEmpty';
 import type { IMovieProps } from './Movie.types';
 import styles from './movie.module.css';
 import { toDateString } from '@/utils/date-time/to-date-string';
+import { useCallback } from 'react';
+import { getWikipediaSearchResult } from '@/api/get-wikipedia-search-result';
 
 export function Movie(props: IMovieProps) {
   const { movie } = props;
+
+  const handleWikipediaSEarchComplete = useCallback(() => {}, []);
+
+  const handleNameClick = useCallback(() => {
+    console.log('Title clicked');
+    getWikipediaSearchResult(movie.name, handleWikipediaSEarchComplete);
+  }, [movie.name, handleWikipediaSEarchComplete]);
 
   const movieData: React.ReactNode[] = [
     movie.releaseDate ? (
@@ -33,9 +42,14 @@ export function Movie(props: IMovieProps) {
 
   return (
     <div className={styles.movie} data-testid="movie">
-      <div className={styles.title} data-testid="title">
+      <button
+        type="button"
+        className={styles.title}
+        onClick={handleNameClick}
+        data-testid="title"
+      >
         {movie.name}
-      </div>
+      </button>
       {movie.tagline && (
         <div className={styles.tagline} data-testid="tagline">
           {movie.tagline}

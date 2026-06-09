@@ -2,7 +2,11 @@
   margin: 1em 0;
 
   .title {
+    padding: 0;
+    border: none;
+    background-color: transparent;
     font-weight: 700;
+    cursor: pointer;
   }
 
   .tagline {
