@@ -3,7 +3,7 @@ import type { IWikipediaPageExtract } from "./wikipedia-page-extract.types";
 
 export function fetchWikipediaPageExtract(
   pageTitle: string,
-): Promise<IWikipediaPageExtract> {
+): Promise<Omit<IWikipediaPageExtract, "url">> {
   const urlSearchParams = new URLSearchParams({
     action: "query",
     titles: pageTitle,

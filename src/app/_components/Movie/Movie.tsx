@@ -2,25 +2,43 @@ import { isEmpty } from '@/utils/array/isEmpty';
 import type { IMovieProps } from './Movie.types';
 import styles from './movie.module.css';
 import { toDateString } from '@/utils/date-time/to-date-string';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { getWikipediaPageExtract } from '@/api/get-wikipedia-page-extract';
 import type { IOnRequestChangeParams } from '@/api/request-change.types';
 import type { IWikipediaPageExtract } from '@/api/wikipedia-page-extract.types';
+import type { Nullable } from '@/utils/types/nullable';
+import { isBlank } from '@/utils/string/isBlank';
+import Link from 'next/link';
 
 export function Movie(props: IMovieProps) {
   const { movie } = props;
 
+  const [detailsShown, setDetailsShown] = useState(false);
+  const [details, setDetails] = useState<Nullable<string>>(null);
+  const [wikipediaUrl, setWikipediaUrl] = useState<Nullable<string>>(null);
+
+  const hideDetails = useCallback(() => setDetailsShown(false), []);
+
   const handleRequestCompletion = useCallback(
     (event: IOnRequestChangeParams<IWikipediaPageExtract>) => {
-      console.log('Extract:', event.data.extract);
+      const pageSections = event.data.extract.split(/\n\n\n/);
+      const firstSection = pageSections[0];
+      if (!isBlank(firstSection)) {
+        setDetails(firstSection);
+        setWikipediaUrl(event.data.url);
+        setDetailsShown(true);
+      }
     },
     [],
   );
 
   const handleNameClick = useCallback(() => {
-    console.log('Title clicked');
-    getWikipediaPageExtract(movie.name, handleRequestCompletion);
-  }, [movie.name, handleRequestCompletion]);
+    if (!details) {
+      getWikipediaPageExtract(movie.name, handleRequestCompletion);
+    } else if (!detailsShown) {
+      setDetailsShown(true);
+    }
+  }, [movie.name, handleRequestCompletion, details, detailsShown]);
 
   const movieData: React.ReactNode[] = [
     movie.releaseDate ? (
@@ -66,6 +84,32 @@ export function Movie(props: IMovieProps) {
       <div className={styles.overview} data-testid="overview">
         {movie.overview}
       </div>
+      {detailsShown && !isBlank(details) && (
+        <div className={styles.detailsContainer} data-testid="detailsContainer">
+          <p className={styles.detailsTitle} data-testid="detailsTitle">
+            Further details from Wikipedia:
+          </p>
+          <p className={styles.detailsText} data-testid="detailsText">
+            {details}
+          </p>
+          <button
+            type="button"
+            className={styles.hideDetails}
+            data-testid="hideDetails"
+            onClick={hideDetails}
+          >
+            Hide details
+          </button>
+          <Link
+            href={wikipediaUrl!}
+            target="_blank"
+            className={styles.linkToWikipedia}
+            data-testid="linkToWikipedia"
+          >
+            Go to Wikipedia article
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

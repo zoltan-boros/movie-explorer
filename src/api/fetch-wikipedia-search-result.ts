@@ -20,17 +20,25 @@ export function fetchWikipediaSearchResult(
       if (!isArray(result)) {
         throw new Error("Invalid response.");
       }
+
       const pageTitles = result[1];
-      if (!isArray(pageTitles)) {
+      const pageUrls = result[3];
+
+      if (!isArray(pageTitles) || !isArray(pageUrls)) {
         throw new Error("Invalid response.");
       }
+
       if (isEmpty(pageTitles)) {
         throw new Error(`Movie "${movieTitle}" not found on Wikipedia.`);
       }
+
       const pageTitle = pageTitles[0];
-      if (typeof pageTitle === "string") {
-        return { pageTitle };
+      const pageUrl = pageUrls[0];
+
+      if (typeof pageTitle !== "string" || typeof pageUrl !== "string") {
+        throw new Error("Invalid response.");
       }
-      throw new Error("Invalid response.");
+
+      return { pageTitle, pageUrl };
     });
 }

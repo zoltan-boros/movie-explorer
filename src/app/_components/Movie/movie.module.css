@@ -36,4 +36,10 @@
 
   .overview {
   }
+
+  .detailsContainer {
+    .linkToWikipedia {
+      margin-left: 1em;
+    }
+  }
 }

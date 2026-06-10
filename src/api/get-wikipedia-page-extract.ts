@@ -9,13 +9,16 @@ export function getWikipediaPageExtract(
     params: IOnRequestChangeParams<IWikipediaPageExtract>,
   ) => void,
 ): void {
-  fetchWikipediaSearchResult(searchTerm)
-    .then((result) => fetchWikipediaPageExtract(result.pageTitle))
-    .then((pageExtract) => {
+  fetchWikipediaSearchResult(searchTerm).then((result) =>
+    fetchWikipediaPageExtract(result.pageTitle).then((partialPageExtract) => {
       onSearchComplete({
         status: "a",
         searchTerm,
-        data: pageExtract,
+        data: {
+          ...partialPageExtract,
+          url: result.pageUrl,
+        },
       });
-    });
+    }),
+  );
 }
