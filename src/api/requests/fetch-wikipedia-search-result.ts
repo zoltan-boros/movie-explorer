@@ -1,6 +1,6 @@
 import { isArray } from "@/utils/array/is-array";
-import { SERVICE_URLS } from "./constants";
-import type { IWikipediaSearchResult } from "./wikipedia-search-result.types";
+import { SERVICE_URLS } from "../constants";
+import type { IWikipediaSearchResult } from "../schema/wikipedia-search-result.types";
 import { isEmpty } from "@/utils/array/isEmpty";
 
 export function fetchWikipediaSearchResult(

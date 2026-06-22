@@ -1,6 +1,6 @@
 'use client';
 
-import type { IMovie } from '@/api/movie.types';
+import type { IMovie } from '@/api/schema/movie.types';
 import { useCallback, useState } from 'react';
 import { SearchPanel } from './_components/SearchPanel/SearchPanel';
 import styles from './page.module.css';

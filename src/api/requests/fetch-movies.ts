@@ -1,5 +1,5 @@
-import { SERVICE_URLS } from "./constants";
-import type { IMovie } from "./movie.types";
+import { SERVICE_URLS } from "../constants";
+import type { IMovie } from "../schema/movie.types";
 
 const query = `query SearchMovies($title: String!) {
     searchMovies(query: $title) {

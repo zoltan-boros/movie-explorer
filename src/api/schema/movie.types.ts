@@ -1,5 +1,5 @@
 import type { ICredit } from "./credit.types";
-import type { IGenre } from "./genre";
+import type { IGenre } from "./genre.types";
 
 export interface IMovie {
   id: string;

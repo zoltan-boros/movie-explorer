@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import type { ISearchPanelProps } from './SearchPanel.types';
-import { getMovies } from '@/api/get-movies';
+import { getMovies } from '@/api/requests/get-movies';
 import styles from './SearchPanel.module.css';
 import { isBlank } from '@/utils/string/isBlank';
 

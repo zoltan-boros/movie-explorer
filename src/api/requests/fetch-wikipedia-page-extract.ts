@@ -1,5 +1,5 @@
-import { SERVICE_URLS } from "./constants";
-import type { IWikipediaPageExtract } from "./wikipedia-page-extract.types";
+import { SERVICE_URLS } from "../constants";
+import type { IWikipediaPageExtract } from "../schema/wikipedia-page-extract.types";
 
 export function fetchWikipediaPageExtract(
   pageTitle: string,
