@@ -1,4 +1,3 @@
-import { SERVICE_URLS } from "../constants";
 import type { IWikipediaPageExtract } from "../schema/wikipedia-page-extract.types";
 
 export function fetchWikipediaPageExtract(
@@ -14,7 +13,9 @@ export function fetchWikipediaPageExtract(
     format: "json",
   });
 
-  return fetch(`${SERVICE_URLS.WIKIPEDIA}${urlSearchParams.toString()}`)
+  return fetch(
+    `${process.env.NEXT_PUBLIC_WIKIPEDIA_URL}${urlSearchParams.toString()}`,
+  )
     .then((response) => response.json())
     .then((result) => {
       const pageData = Object.entries<any>(result.query.pages)[0][1];

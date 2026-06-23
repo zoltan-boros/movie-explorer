@@ -2,10 +2,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-```
-
-Then, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Make a copy of `.env.template` as `.env`, then fill it in.
+2. Run the development server: `npm run dev`
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

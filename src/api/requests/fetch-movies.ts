@@ -1,4 +1,3 @@
-import { SERVICE_URLS } from "../constants";
 import type { IMovie } from "../schema/movie.types";
 
 const query = `query SearchMovies($title: String!) {
@@ -28,7 +27,7 @@ const query = `query SearchMovies($title: String!) {
   }`;
 
 export function fetchMovies(searchTerm: string): Promise<IMovie[]> {
-  return fetch(SERVICE_URLS.ZOOSH_TMDB, {
+  return fetch(process.env.NEXT_PUBLIC_TMDB_URL!, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

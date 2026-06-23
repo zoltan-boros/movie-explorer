@@ -1,5 +1,4 @@
 import { isArray } from "@/utils/array/is-array";
-import { SERVICE_URLS } from "../constants";
 import type { IWikipediaSearchResult } from "../schema/wikipedia-search-result.types";
 import { isEmpty } from "@/utils/array/isEmpty";
 
@@ -14,7 +13,9 @@ export function fetchWikipediaSearchResult(
     limit: "1",
   });
 
-  return fetch(`${SERVICE_URLS.WIKIPEDIA}${urlSearchParams.toString()}`)
+  return fetch(
+    `${process.env.NEXT_PUBLIC_WIKIPEDIA_URL}${urlSearchParams.toString()}`,
+  )
     .then((response) => response.json())
     .then((result) => {
       if (!isArray(result)) {
